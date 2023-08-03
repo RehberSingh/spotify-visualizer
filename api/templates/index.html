@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    {% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Spotify Visualization{% endblock %} </title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/htmx/1.9.4/htmx.min.js" integrity="sha512-ZM2vxgVBxhBI5Etj/c/qcJV+upate3VzbVQOQRCx1YGuyEX9dYdMh8pRUot4xIwtAay6QwRQC/FdXRjSWIEHrg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="static/style.css">
+    {% endblock %}
+  </head>
+  <body>
+    <div class="wrapper">
+      <h1>Spotify Visualizer</h1>
+    </div>
+    <div class="wrapper">
+      <h2>Enter Spotify Playlist Link Below</h2>
+    </div>
+    <div class="wrapper">
+        <form method="post" action="/charts">
+          <input type="text" name="uri" class="text">
+          <input type="submit" value="Submit" class="btn">
+      </form>
+    </div>
+    
+    <div id="response"></div>
+  </body>
+</html>

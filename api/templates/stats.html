@@ -1,0 +1,233 @@
+<!doctype html>
+<html>
+  <head>
+    {% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Spotify Visualization{% endblock %} </title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/htmx/1.9.4/htmx.min.js" integrity="sha512-ZM2vxgVBxhBI5Etj/c/qcJV+upate3VzbVQOQRCx1YGuyEX9dYdMh8pRUot4xIwtAay6QwRQC/FdXRjSWIEHrg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="static/style.css">
+    {% endblock %}
+  </head>
+  <body>
+    <h1>{{playlist_name}}</h1>
+    <div class="flex">
+      <canvas id="tempo-line-graph" width="900", height="350"></canvas>
+      <canvas id="danceability-line-graph" width="900", height="350"></canvas>
+      <canvas id="energy-line-graph" width="900", height="350"></canvas>
+      <canvas id="scatterplot-1" width="900", height="350"></canvas>
+      <canvas id="scatterplot-2" width="900", height="350"></canvas>
+      <canvas id="scatterplot-3" width="900", height="350"></canvas>
+    </div>
+  </body>
+  <script>
+    var chrt = document.getElementById("tempo-line-graph").getContext("2d");
+    var spotifyGreen = '#1DB954';
+    var chartId = new Chart(chrt, {
+      type: 'line',
+      data: {
+        labels: {{name | safe}},
+        datasets: [{
+          label: "Tempo",
+          data: {{tempo | safe}},
+          borderColor: spotifyGreen,
+          borderWidth: 2,
+          pointRadius: 0,
+          tension:0.5,
+        }],
+      },
+      options: {
+        responsive: false,
+        scales: {
+          x: {
+            display: false,
+          },
+          y: {
+            display: true,
+          }
+        }
+      },
+    });
+ </script>
+
+<script>
+  var chrt = document.getElementById("danceability-line-graph").getContext("2d");
+  var spotifyGreen = '#1DB954';
+  var chartId = new Chart(chrt, {
+    type: 'line',
+    data: {
+      labels: {{name | safe}},
+      datasets: [{
+        label: "danceability",
+        data: {{danceability | safe}},
+        borderColor: spotifyGreen,
+        borderWidth: 2,
+        pointRadius: 0,
+        tension: 0.5,
+      }],
+    },
+    options: {
+      responsive: false,
+      scales: {
+        x: {
+          display: false,
+        },
+        y: {
+          display: true,
+        }
+      }
+    },
+  });
+</script>
+
+<script>
+  var chrt = document.getElementById("danceability-line-graph").getContext("2d");
+  var spotifyGreen = '#1DB954';
+  var chartId = new Chart(chrt, {
+    type: 'line',
+    data: {
+      labels: {{name | safe}},
+      datasets: [{
+        label: "danceability",
+        data: {{danceability | safe}},
+        borderColor: spotifyGreen,
+        borderWidth: 2,
+        pointRadius: 0,
+        tension: 0.5,
+      }],
+    },
+    options: {
+      responsive: false,
+      scales: {
+        x: {
+          display: false,
+        },
+        y: {
+          display: true,
+        }
+      }
+    },
+  });
+</script>
+
+<script>
+  var chrt = document.getElementById("energy-line-graph").getContext("2d");
+  var spotifyGreen = '#1DB954';
+  var chartId = new Chart(chrt, {
+    type: 'line',
+    data: {
+      labels: {{name | safe}},
+      datasets: [{
+        label: "Energy",
+        data: {{energy | safe}},
+        borderColor: spotifyGreen,
+        borderWidth: 2,
+        pointRadius: 0,
+        tension: 0.5,
+      }],
+    },
+    options: {
+      responsive: false,
+      scales: {
+        x: {
+          display: false,
+        },
+        y: {
+          display: true,
+        }
+      }
+    },
+  });
+</script>
+
+<script>
+  var chrt = document.getElementById("scatterplot-1").getContext("2d");
+  var spotifyGreen = '#1DB954';
+  var chartId = new Chart(chrt, {
+    type: 'scatter',
+    data: {
+      labels: {{name | safe}},
+      datasets: [{
+        label: "Tempo Danceability",
+        data: {{tempo_danceability_scatterplot | safe}},
+        borderColor: spotifyGreen,
+        borderWidth: 2,
+        pointRadius: 3,
+        tension: 0.5,
+      }],
+    },
+    options: {
+      responsive: false,
+      scales: {
+        x: {
+          display: true,
+        },
+        y: {
+          display: true,
+        }
+      }
+    },
+  });
+</script>
+
+<script>
+  var chrt = document.getElementById("scatterplot-2").getContext("2d");
+  var spotifyGreen = '#1DB954';
+  var chartId = new Chart(chrt, {
+    type: 'scatter',
+    data: {
+      labels: {{name | safe}},
+      datasets: [{
+        label: "Tempo Energy",
+        data: {{tempo_energy_scatterplot | safe}},
+        borderColor: spotifyGreen,
+        borderWidth: 2,
+        pointRadius: 3,
+        tension: 0.5,
+      }],
+    },
+    options: {
+      responsive: false,
+      scales: {
+        x: {
+          display: true,
+        },
+        y: {
+          display: true,
+        }
+      }
+    },
+  });
+</script>
+
+<script>
+  var chrt = document.getElementById("scatterplot-3").getContext("2d");
+  var spotifyGreen = '#1DB954';
+  var chartId = new Chart(chrt, {
+    type: 'scatter',
+    data: {
+      labels: {{name | safe}},
+      datasets: [{
+        label: "Energy Danceability",
+        data: {{energy_danceability_scatterplot | safe}},
+        borderColor: spotifyGreen,
+        borderWidth: 2,
+        pointRadius: 3,
+        tension: 0.5,
+      }],
+    },
+    options: {
+      responsive: false,
+      scales: {
+        x: {
+          display: true,
+        },
+        y: {
+          display: true,
+        }
+      }
+    },
+  });
+</script>
+
+</html>
