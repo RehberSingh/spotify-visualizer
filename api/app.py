@@ -1,9 +1,8 @@
 from flask import Flask, session, request, redirect , render_template
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
-from dotenv import load_dotenv
 import re
-load_dotenv()
+
 
 app = Flask(__name__)
 
